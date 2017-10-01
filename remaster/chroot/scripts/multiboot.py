@@ -153,6 +153,8 @@ read a
             return self.ubuntu_menu
         elif self.iso.distro == 'linuxmint':
             return self.ubuntu_menu
+        elif self.iso.distro == 'zorinos':
+            return self.ubuntu_menu
         elif self.iso.distro == 'grml':
             return self.grml_menu
         elif self.iso.distro == 'debian':

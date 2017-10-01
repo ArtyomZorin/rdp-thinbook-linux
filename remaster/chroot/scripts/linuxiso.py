@@ -120,6 +120,19 @@ def get_distro(iso_path):
     except:
         pass
 
+    # ZorinOS
+    '''
+    info in /.disk/info contains
+        Zorin OS 12.2 Core 64 bit
+    Look for info starting with 'Zorin OS'
+    '''
+    try:
+        s = iso.record('.disk', 'info').content
+        if s.startswith('Zorin OS'):
+            return('zorinos')
+    except:
+        pass
+
     # TinyCoreLinux
     '''
     Debian-derivative, but does not have identifying dir /file
@@ -157,6 +170,7 @@ def get_instance(iso_path):
         'grml': GRMLISO,
         'knoppix': KnoppixISO,
         'linuxmint': LinuxMintISO,
+        'zorinos': ZorinOSISO,
         'tinycore': TinyCoreISO,
         'puppy': PuppyISO,
         'generic': GenericLinuxISO
@@ -181,6 +195,7 @@ class LinuxISO(object):
         - Ubuntu, official flavours
         - Unofficial Ubuntu flavours:
             - LinuxMint
+            - Zorin OS
         - Standard Debian - Jessie 8.0 stable tested
         - GRML - including combined 32-bit and 64-bit:
             - Daily builds work
@@ -209,7 +224,7 @@ class LinuxISO(object):
     '''
     KNOWN_DISTROS = [
         'ubuntu', 'debian', 'knoppix', 'grml', 'linuxmint',
-        'tinycore', 'puppy', 'generic'
+        'zorinos', 'tinycore', 'puppy', 'generic'
     ]
 
     def __init__(self, iso_path, distro='generic'):
@@ -355,6 +370,10 @@ class KnoppixISO(DebianISO):
 
 
 class LinuxMintISO(UbuntuISO):
+    pass
+
+
+class ZorinOSISO(UbuntuISO):
     pass
 
 
